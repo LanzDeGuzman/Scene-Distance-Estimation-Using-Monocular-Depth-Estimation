@@ -1,1 +1,5 @@
 model-large.onnx filter=lfs diff=lfs merge=lfs -text
+Yolo.weights filter=lfs diff=lfs merge=lfs -text
+yolov4-obj_10000.weights filter=lfs diff=lfs merge=lfs -text
+custom_license.weights filter=lfs diff=lfs merge=lfs -text
+yolov3.weights filter=lfs diff=lfs merge=lfs -text
