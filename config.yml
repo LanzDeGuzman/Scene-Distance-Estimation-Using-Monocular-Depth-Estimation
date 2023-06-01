@@ -1,0 +1,29 @@
+
+#File location of models.
+model_path:
+  coco_names: F:\Realtime Monocular Depth Estimation\models\coco.names
+  vehicle_names: F:\Realtime Monocular Depth Estimation\models\obj.names
+  licenseplate_names: F:\Realtime Monocular Depth Estimation\models\obj-license.names
+
+  coco_yolo_cfg: F:\Realtime Monocular Depth Estimation\models\yolov3.cfg
+  coco_yolo_weights: F:\Realtime Monocular Depth Estimation\models\yolov3.weights
+
+  vehicle_yolo_cfg: F:\Realtime Monocular Depth Estimation\models\yolov4-obj.cfg
+  vehicle_yolo_weights: F:\Realtime Monocular Depth Estimation\models\yolov4-obj_10000.weights
+  
+  licenseplate_yolo_cfg: F:\Realtime Monocular Depth Estimation\models\yolov4-obj-license.cfg
+  licenseplate_yolo_weights: F:\Realtime Monocular Depth Estimation\models\custom_license.weights
+
+  MDE_model_path: F:\Realtime Monocular Depth Estimation\models\model-small.onnx
+ 
+#Camera information.
+camera_information:
+  sensor_height_mm: 9.6                                                                                                 # Camera Sensor height in mm
+  sensor_height_px: 960                                                                                                 # Camera feed native pixel resolution height   
+  focal_length: 14   
+
+#Target Object information
+target_object:
+  person: person
+  license_plate: Vehicle registration plate
+  real_object_height: 160                                                                                               # Target Object physical height in mm
