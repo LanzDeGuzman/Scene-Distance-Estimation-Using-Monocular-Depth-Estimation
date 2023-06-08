@@ -69,7 +69,7 @@ The Reference Distance is the Target Object's calculated distance using the equa
 ### Camera Set Up and Information Used
 
 <p align="center">
-  <img width="700" src=![image](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/49f492cd-8db7-4bf2-bf43-3823d1d87870)>
+  <img width="700" src=https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/49f492cd-8db7-4bf2-bf43-3823d1d87870 >
 </p>
 
 Throughout the experimentation and testing period, **Logitech's C310**, a single USB camera, was used. Note that the sensor height is multiplied by two due to the pixel resolution being upscaled by the software from 640 (w) x 480 (h) to 1280 (w) x 960 (h). An Apple M1 MacBook Air was used as the primary computing device throughout the testing period.
