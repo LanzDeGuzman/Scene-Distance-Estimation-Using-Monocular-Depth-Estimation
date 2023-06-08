@@ -11,6 +11,8 @@ Significant advancements in the field of robotics engineering and autonomous sys
                                        
 Throughout this repository **MiDaS - MDE models trained by Ranftl et al. were used.** Compared to various MDE models available, MiDaS' approach in training a model by mixing datasets to cover diverse environments provided an effective and robust MDE model for multiple applications.
 
+Read More @ https://github.com/isl-org/MiDaS.
+
 
 
 
