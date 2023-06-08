@@ -79,8 +79,8 @@ The MDE model that was specifically used was the MiDaS v2.1 Small. The small mod
 
 |     MODEL     |    Repository  Link     |
 | ------------- | ------------- |
-| MiDaS Model   |  https://github.com/isl-org/MiDaS |
-| Yolo V3 MS COCO  Model | https://pjreddie.com/darknet/yolo/ |
+| MiDaS Models   |  https://github.com/isl-org/MiDaS |
+| YOLOv3 MS COCO  Model | https://pjreddie.com/darknet/yolo/ |
 | YOLOv4 Road Obstacle | https://github.com/dec880126/Self-driving-with-YOLO |
 | YOLOv4 License Plate Detection | https://github.com/GautamKataria/Yolov4-Pytesseract-License-plate-detection-and-reading |
 
