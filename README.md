@@ -49,7 +49,7 @@ Moreover, YOLO allowed the classification of the Target Object and other Surroun
 ### MiDaS - YOLO
 Since the target object's actualized distance, position in feed, and corresponding depth map value from the MiDaS model are calculated. These values are then related to the rest of the depth map via inverse proportion to calculate the surrounding objects' actualized distances. 
 
-Upon testing, the relationship of the generated depth map was observed to be inversely proportional. Whereby within the normalized scale of 0 - 1, closer values to 1 represent that an object is far and vice versa and whose relationship is represented by the equation: 
+Upon testing, the relationship of the generated depth map was observed to be inversely proportional. Whereby within the normalized scale of 0 - 1, closer values to 0 represent that an object is far and vice versa and whose relationship is represented by the equation: 
 
 <p align="center">
  <img width= '700' src= https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/c6c906c0-dab3-46f3-b805-827e3ac6c855 >
@@ -85,7 +85,64 @@ The MDE model that was specifically used was the MiDaS v2.1 Small. The small mod
 | YOLOv4 License Plate Detection | https://github.com/GautamKataria/Yolov4-Pytesseract-License-plate-detection-and-reading |
 
 # Testing and Results 
-**Accuracy testing** was performed under controlled static environments, and **performance testing** was conducted under uncontrolled environments.   
+**Accuracy testing** was performed under controlled static environments, and **performance testing** was conducted under uncontrolled environments.  
+## Accuracy Testing 
 
+Household items such as cups and bottles were used throughout the accuracy testing period. From the test samples below, a cup was the target object, and the bottles were the surrounding objects. Results from the test showed an average of **98% accuracy** in detecting the target object and **87% accuracy** in detecting the target objects.  
 
+### Position 1
+<img width="1276" alt="Screen Shot 2023-06-21 at 10 48 29 PM" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/7911fe1c-cd8d-4acc-b394-e901b9950ec4">
 
+|  |True Value (mm)|Calculated Value (mm)|	% Error|
+|--|-----------------|-----------------------|---------|
+|**Cup**|	600|	597.61	|0.40|
+|**Bottle**|	390|	397.12|	1.83|
+
+### Position 2
+<img width="1276" alt="Screen Shot 2023-06-21 at 10 53 24 PM" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/c105d6a6-1638-47ac-90db-8ecc67ff5aec">
+
+|  |True Value (mm)|Calculated Value (mm)|	% Error|
+|--|-----------------|-----------------------|---------|
+|**Cup**|	370|	355.47 |3.93|
+|**Bottle**|	260|	241.64 |	7.06|
+
+### Position 3
+<img width="1279" alt="Screen Shot 2023-06-21 at 11 00 55 PM" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/7df271f7-e003-4983-9bf6-41669c548309">
+
+|  |True Value (mm)|Calculated Value (mm)|	% Error|
+|--|-----------------|-----------------------|---------|
+|**Cup**|	360|	351.42 |2.38|
+|**Bottle**|	780|	997.95|	27.94|
+
+### Position 4 (Three Items)
+<img width="1278" alt="Screen Shot 2023-06-22 at 12 49 42 AM" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/736c0089-09cf-45b4-ae99-4c0135da8640">
+
+|  |True Value (mm)|Calculated Value (mm)|	% Error|
+|--|-----------------|-----------------------|---------|
+|**Cup**|	425|	430.49 |1.29|
+|**Bottle #1**|	620|726.9|	17.24|
+|**Bottle #2**|	300|	324.53|	8.18|
+
+## Performance Testing 
+
+Throughout the performance testing, the surrounding objects are the road elements, while the target object is the license plate. Within this test, bounding boxes are updated based on their level of potential danger. Whenever a detected object is less than 3000 mm or 3 m, around the length of 2 cars, they are regarded as a potential danger and are represented by changing their bounding boxes to the color red. Whenever an object is considered safe, its bounding box colors change to green. This scenario showcases the program's performance in city driving conditions.
+
+**Real-Time Road Performance Testing#1 x5 Speed**
+
+https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/123999b9-c64c-48ad-bf55-393033e23812
+
+**Real-Time Road Performance Testing#2 x5 Speed**
+
+https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/fd8f6b1c-c4d0-4c39-911f-67887e381336
+
+**Road Performance Testing Using Pre-Recorded Videos**
+
+https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/7c7f1095-260c-4e19-90c0-39751e9d0c51
+
+Actual Processing Speed - https://youtu.be/bOl1fs1QDyg
+
+Because of the dynamic nature of these scenarios, variability is observed when measuring distances. The use of detecting license plates as target objects had pros and cons. These are only applicable when a car is in front; thus, detection and depth retrieval is rarely observed when turning left or right. Accordingly, the test was highly limited by the machine's processing capability. Frame processing is far from usable and must be improved for further studies and real-time applications. Unable to measure the computed and predicted distance estimation accuracy, the test shows promise and proof of the concept of using MDE in obstacle detection and is a potential tool for autonomous navigation.
+
+# Using The Source Code
+
+To run the program locally, clone this repository first. 
