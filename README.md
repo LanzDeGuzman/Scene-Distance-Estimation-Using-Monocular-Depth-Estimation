@@ -91,37 +91,16 @@ The MDE model that was specifically used was the MiDaS v2.1 Small. The small mod
 Household items such as cups and bottles were used throughout the accuracy testing period. From the test samples below, a cup was the target object, and the bottles were the surrounding objects. Results from the test showed an average of **98% accuracy** in detecting the target object and **87% accuracy** in detecting the target objects.  
 
 ### Position 1
-<img width="1276" alt="Screen Shot 2023-06-21 at 10 48 29 PM" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/7911fe1c-cd8d-4acc-b394-e901b9950ec4">
-
-|  |True Value (mm)|Calculated Value (mm)|	% Error|
-|--|-----------------|-----------------------|---------|
-|**Cup**|	600|	597.61	|0.40|
-|**Bottle**|	390|	397.12|	1.83|
+![1](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/2dc94d3f-7f9a-4a47-82ff-57db7a90a0a4)
 
 ### Position 2
-<img width="1276" alt="Screen Shot 2023-06-21 at 10 53 24 PM" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/c105d6a6-1638-47ac-90db-8ecc67ff5aec">
-
-|  |True Value (mm)|Calculated Value (mm)|	% Error|
-|--|-----------------|-----------------------|---------|
-|**Cup**|	370|	355.47 |3.93|
-|**Bottle**|	260|	241.64 |	7.06|
+![2](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/82cf311a-a05d-4d1e-bdb5-d073617e0b5d)
 
 ### Position 3
-<img width="1279" alt="Screen Shot 2023-06-21 at 11 00 55 PM" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/7df271f7-e003-4983-9bf6-41669c548309">
-
-|  |True Value (mm)|Calculated Value (mm)|	% Error|
-|--|-----------------|-----------------------|---------|
-|**Cup**|	360|	351.42 |2.38|
-|**Bottle**|	780|	997.95|	27.94|
+![3](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/03ceee98-9f10-4538-98c2-41059bdc17a9)
 
 ### Position 4 (Three Items)
-<img width="1278" alt="Screen Shot 2023-06-22 at 12 49 42 AM" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/736c0089-09cf-45b4-ae99-4c0135da8640">
-
-|  |True Value (mm)|Calculated Value (mm)|	% Error|
-|--|-----------------|-----------------------|---------|
-|**Cup**|	425|	430.49 |1.29|
-|**Bottle #1**|	620|726.9|	17.24|
-|**Bottle #2**|	300|	324.53|	8.18|
+![4](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/f75bbc5f-fb72-4814-b6f9-545da3052170)
 
 ## Performance Testing 
 
