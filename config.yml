@@ -24,6 +24,6 @@ camera_information:
 
 #Target Object information
 target_object:
-  person: person
-  license_plate: Vehicle registration plate
+  #target: cup
+  target: Vehicle registration plate
   real_object_height: 160                                                                                               # Target Object physical height in mm
