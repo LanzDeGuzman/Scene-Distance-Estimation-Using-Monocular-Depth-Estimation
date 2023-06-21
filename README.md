@@ -6,8 +6,7 @@ Significant advancements in the field of robotics engineering and autonomous sys
 **This repository contains the source code of the method of actualizing generated depth map values for static and dynamic scenario applications.** On top of using an MDE model, the proposed method involves relating physical optic concepts and YOLO object detection in calculating actual distance information. Accordingly, the established method was applied to road obstacle detection.
 
 # Monocular Depth Estimation Model 
-
-<img align="left" width = 820 src ="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/8fd5e9a3-7107-4cde-a71b-4bd25ba752db">
+<img align="left" width = 820 src ="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/af288b93-84ca-445a-be73-d5bd5e1725c5">
                                        
 Throughout this repository **MiDaS - MDE models trained by Ranftl et al. were used.** Compared to various MDE models available, MiDaS' approach in training a model by mixing datasets to cover diverse environments provided an effective and robust MDE model for multiple applications.
 
@@ -16,7 +15,7 @@ Read More @ https://github.com/isl-org/MiDaS.
 # Actualizing Method and Physical Concepts Used
 ### Thin Lens Diagram
 <p align="center">
-  <img width="700" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/c07d8cad-94fc-4b89-aae6-06a4cc3cf54a">
+  <img width="700" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/dee5a119-14d4-49c6-a831-8455648921c6">
 </p>
 In order to actualize depth map values into measurement quantities such as the SI units, physical relationships were inferred using the thin lens diagram together with ground
 truths from the camera's information and a known object's pixel height. Given this formulaic constraint, the actualizing approach is limited to scenarios where a target object with known physical height measurement is present within a video feed.
@@ -24,7 +23,7 @@ truths from the camera's information and a known object's pixel height. Given th
 ### Inferred Equations
 
 <p align="center">
-  <img width= '700' src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/35f44bbb-4724-441a-a71a-17998a7a85d6">
+  <img width= '700' src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/7bf8bf9a-d150-4455-8fc6-1d42bc46bfe3">
 </p>
 
 From the thin lens model, the following equations are drawn. The proportion between the sensor height (measured in millimeters) and the object's pixel height, as observed in the image feed, is utilized to calculate the object's height on the sensor in millimeters. By dividing this proportion by the overall image resolution height (measured in pixels), the object's height in millimeters on the physical camera sensor is essentially inferred.
@@ -32,27 +31,27 @@ From the thin lens model, the following equations are drawn. The proportion betw
 In summary, this equation allows us to linearize the observable data to estimate the physical size of an object on the camera sensor and correspondingly use it to accommodate the thin lens diagram. These variables that comprise the thin lens diagram are algebraically re-arranged to compute an object's distance to the camera.  
 
 ### Limitations
-Given the formulaic constraint, the actualizing method is limited to the following- Accuracy of the camera's information, Scenarios where a, **Target Object**, an Object with known physical height measurement is present within the camera's feed, and that the Target Object is always perpendicular to the camera.
+Given the formulaic constraint, the actualizing method is limited to the following- Accuracy of the camera's information, Scenarios where a **Target Object**, an Object with known physical height measurement, is present within the camera's feed, and that the Target Object is always perpendicular to the camera.
 
 ### YOLO Object Detection 
 <p align="center">
- <img width= '700' src= "https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/e9c235c4-d922-4f6a-bffa-866e2a7ad791">
+ <img width= '700' src= "https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/59e98a7f-88b6-4612-be2d-c53b34eeecfb">
 </p>
 
 To continuously compute the object's actualized distance, **YOLO Object detection** was used. YOLO's bounding box outputs were extensively used to determine the Target Object's pixel height (h) and accompany the actualization of values through the lens optic equation.
 
 Moreover, YOLO allowed the classification of the Target Object and other Surrounding Objects, and from its bounding box centroids, the Target and Surrounding Object's distances based on the MDE-generated depth map are adequately referenced.
-
-![image](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/be4148dd-5e4e-40c6-b169-30edeccd7c0b)
-![image](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/b60d6460-a5c5-4f01-8a6d-2b2f41967c57)
-
+<p align="center">
+  <img width= '700' src= https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/9c769079-901e-4be7-bd59-4f6cd1807707 >
+  <img width= '700' src= https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/6943aef8-922f-4f3f-bfa4-1899d574f7fe >
+</p>
 ### MiDaS - YOLO
 Since the target object's actualized distance, position in feed, and corresponding depth map value from the MiDaS model are calculated. These values are then related to the rest of the depth map via inverse proportion to calculate the surrounding objects' actualized distances. 
 
 Upon testing, the relationship of the generated depth map was observed to be inversely proportional. Whereby within the normalized scale of 0 - 1, closer values to 0 represent that an object is far and vice versa and whose relationship is represented by the equation: 
 
 <p align="center">
- <img width= '700' src= https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/c6c906c0-dab3-46f3-b805-827e3ac6c855 >
+ <img width= '700' src= https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/c1ab69ba-3f40-49f7-829d-2fdeaab5c959 >
 </p>
 
 The Reference Distance is the Target Object's calculated distance using the equation drawn from the thin lens model, Reference MiDaS Value is the Target Object centroid's MiDaS value, and the Surrounding Object MiDaS Value is/are the Surrounding Object/s centroid's MiDaS value.
@@ -61,7 +60,7 @@ The Reference Distance is the Target Object's calculated distance using the equa
 **The novelty of this approach is** the ingenuous use of the bounding box output of the YOLO object detection, precisely the bounding box height, the computable detection centroid, and the lens optic formula, for continuous computation of the target object's distance. Since the generated depth map of MiDaS is presented in normalized values, the output of this equation, via lens optic equation, and its location via centroid computation, is then used as a ground reference value for the remainder of the depth map that is adequately related through inverse proportion.
 
 <p align="center">
-  <img width="700" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/c7c3ce1b-29a2-46dd-ac71-5c17b9092d6b">
+  <img width="700" src="https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/9a00bd93-4143-4dcc-baf2-dabcd755da5c">
 </p>
 
 # Camera Set Up, Data Sets, & Models Used
@@ -69,7 +68,7 @@ The Reference Distance is the Target Object's calculated distance using the equa
 ### Camera Set Up and Information Used
 
 <p align="center">
-  <img width="700" src=https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/49f492cd-8db7-4bf2-bf43-3823d1d87870 >
+  <img width="700" src= https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/e2f29dbc-77c2-44ba-9fdb-7156b4cd9e62>
 </p>
 
 Throughout the experimentation and testing period, **Logitech's C310**, a single USB camera, was used. Note that the sensor height is multiplied by two due to the pixel resolution being upscaled by the software from 640 (w) x 480 (h) to 1280 (w) x 960 (h). An Apple M1 MacBook Air was used as the primary computing device throughout the testing period.
@@ -91,16 +90,16 @@ The MDE model that was specifically used was the MiDaS v2.1 Small. The small mod
 Household items such as cups and bottles were used throughout the accuracy testing period. From the test samples below, a cup was the target object, and the bottles were the surrounding objects. Results from the test showed an average of **98% accuracy** in detecting the target object and **87% accuracy** in detecting the target objects.  
 
 ### Position 1
-![1](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/2dc94d3f-7f9a-4a47-82ff-57db7a90a0a4)
+![1](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/96a99c8e-c9dc-49a0-9ba0-8874c6cc6b4b)
 
 ### Position 2
-![2](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/82cf311a-a05d-4d1e-bdb5-d073617e0b5d)
+![2](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/0c3f5106-8ace-409f-8deb-a0f9e4e41943)
 
 ### Position 3
-![3](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/03ceee98-9f10-4538-98c2-41059bdc17a9)
+![3](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/01122895-4c95-43da-a9e9-eed96ef4a3f5)
 
 ### Position 4 (Three Items)
-![4](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/f75bbc5f-fb72-4814-b6f9-545da3052170)
+![4](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/9bf702c9-6569-4dcf-bcc9-337f0f32ddf0)
 
 ## Performance Testing 
 
@@ -108,15 +107,15 @@ Throughout the performance testing, the surrounding objects are the road element
 
 **Real-Time Road Performance Testing#1 x5 Speed**
 
-https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/123999b9-c64c-48ad-bf55-393033e23812
+https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/c90d0ab7-3f7d-4446-b7a7-73dd3cb390b0
 
 **Real-Time Road Performance Testing#2 x5 Speed**
 
-https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/fd8f6b1c-c4d0-4c39-911f-67887e381336
+https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/6c4d9a49-0c31-459c-b795-567034a29755
 
 **Road Performance Testing Using Pre-Recorded Videos**
 
-https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/7c7f1095-260c-4e19-90c0-39751e9d0c51
+https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/405baa79-969c-437f-a829-c9b2d74e7543
 
 Actual Processing Speed - https://youtu.be/bOl1fs1QDyg
 
