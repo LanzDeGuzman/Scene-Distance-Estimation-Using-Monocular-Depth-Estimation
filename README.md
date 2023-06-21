@@ -1,5 +1,5 @@
 # Realtime Scene Distance Estimation Using Monocular Depth Estimation 
-Significant advancements in the field of robotics engineering and autonomous systems development led to the necessity of precise depth measurement solutions as challenges in obstacle detection, obstacle avoidance, and autonomous navigation are becoming increasingly relevant. Conventionally, in measuring depth, distance sensors, 3D scanners, LIDARs, and stereo cameras are used; however, consequent to their popularity is their respective expense. With the popularity of mobile robotic applications, preference for low-form factor and low-cost solutions led to the interest in developing monocular solutions for depth estimation. The conventional depth estimation solution for real-time applications involves a Deep Learning-based approach to measuring distance by using trained models to generate disparity maps from a single camera feed. 
+Significant advancements in the field of robotics engineering and autonomous systems development led to the necessity of precise depth measurement solutions as challenges in obstacle detection, obstacle avoidance, and autonomous navigation are becoming increasingly relevant. Conventionally, in measuring depth, distance sensors, 3D scanners, LIDARs, and stereo cameras are used; however, consequent to their popularity is their respective expense. With the popularity of mobile robotic applications, the preference for low-form factor and low-cost solutions led to the interest in developing monocular solutions for depth estimation. The conventional depth estimation solution for real-time applications involves a Deep Learning-based approach to measuring distance by using trained models to generate disparity maps from a single camera feed. 
 
 **The challenge in monocular depth solutions is their reliability in various precision-based applications.** Results of MDE models are often represented as normalized values rather than actualized measurement values, which limit interpretations and applications without an accompaniment of intricate control systems such as a fuzzy control system or PID controller.
 
@@ -32,7 +32,7 @@ From the thin lens model, the following equations are drawn. The proportion betw
 In summary, this equation allows us to linearize the observable data to estimate the physical size of an object on the camera sensor and correspondingly use it to accommodate the thin lens diagram. These variables that comprise the thin lens diagram are algebraically re-arranged to compute an object's distance to the camera.  
 
 ### Limitations
-Given the formulaic constraint the actualizing method is limited to the following- Accuracy of the camera's information, Scenarios where a, **Target Object**, an Object with known physical height measurement is present within the camera's feed, and that the Target Object is always perpendicular to the camera.
+Given the formulaic constraint, the actualizing method is limited to the following- Accuracy of the camera's information, Scenarios where a, **Target Object**, an Object with known physical height measurement is present within the camera's feed, and that the Target Object is always perpendicular to the camera.
 
 ### YOLO Object Detection 
 <p align="center">
@@ -125,7 +125,7 @@ Household items such as cups and bottles were used throughout the accuracy testi
 
 ## Performance Testing 
 
-Throughout the performance testing, the surrounding objects are the road elements, while the target object is the license plate. Within this test, bounding boxes are updated based on their level of potential danger. Whenever a detected object is less than 3000 mm or 3 m, around the length of 2 cars, they are regarded as a potential danger and are represented by changing their bounding boxes to the color red. Whenever an object is considered safe, its bounding box colors change to green. This scenario showcases the program's performance in city driving conditions.
+Throughout the performance testing, the surrounding objects are the road elements, while the target object is the license plate. Within this test, bounding boxes are updated based on their level of potential danger. Whenever a detected object is less than 3000 mm or 3 m, around the length of 2 cars, they are regarded as a potential danger and are represented by changing their bounding boxes to red. Whenever an object is considered safe, its bounding box colors change to green. This scenario showcases the program's performance in city driving conditions.
 
 **Real-Time Road Performance Testing#1 x5 Speed**
 
@@ -143,6 +143,87 @@ Actual Processing Speed - https://youtu.be/bOl1fs1QDyg
 
 Because of the dynamic nature of these scenarios, variability is observed when measuring distances. The use of detecting license plates as target objects had pros and cons. These are only applicable when a car is in front; thus, detection and depth retrieval is rarely observed when turning left or right. Accordingly, the test was highly limited by the machine's processing capability. Frame processing is far from usable and must be improved for further studies and real-time applications. Unable to measure the computed and predicted distance estimation accuracy, the test shows promise and proof of the concept of using MDE in obstacle detection and is a potential tool for autonomous navigation.
 
+# Future Work
+1. Perform further experiments to validate the proposed method in dynamic scenarios.
+2. Run the program alongside a different distance-measuring device, such as a LIDAR or stereo camera, and compare results accordingly.
+3. Integrate 3D object detection with 3D bounding boxes to address inaccuracy in non-perpendicular detection of the target object. 
+4. Train models using customized datasets to adequately detect country-specific vehicles.
+5. Use newer MDE models and Detection architecture. 
+
 # Using The Source Code
 
-To run the program locally, clone this repository first. 
+The Following dependencies must be installed:
+  1. Python
+  2. OpenCV (Building OpenCV into the computer's CUDA cores is suggested for better performance)
+  3. Numpy
+  4. yaml
+
+To run the program locally, follow the following steps:
+  1. Clone this Repository to your computer either by using Git clone or the repository's download tab.
+  2. Open the Repository into an IDE of your choice.
+  3. Open the config.yml file and update the models' file paths accordingly.
+  4. From the config.yml file, update the camera's information - physical and pixel sensor height and focal length. Cameras have different specifications depending on the model, and inputting the wrong information will yield inaccuracy in using the program. Most cameras' information and specifications are available online. 
+  5. For the Road Obstacle Application, update the **real_object_height** to the standard license plate height in mm in your area/country. For most applications or applications that use the MS COCO detection model, choose a target object present within the names file and correspondingly update its physical height in mm beside **real_object_height**.
+
+      For Road Obstacle Application License Plates as Target Object
+      ```Python
+      target_object:
+        target: Vehicle registration plate
+        real_object_height: 160  #object height in mm
+      ```
+      For Other Applications using MS COCO and Cup as Target Object
+       ```Python
+      target_object:
+        target: cup
+        real_object_height: 95  #object height in mm
+      ```
+  7. Open the config.py and make sure that the target and surrounding object's YOLO files - name, cfg, and weight files are consistently initialized.
+
+     For Road Application config.py must look like this 
+      ```Python
+      class_names = []
+      with open(vehicle_names, 'rt') as f:
+          class_names = f.read().rstrip('\n').split('\n')
+      
+      target_names = []
+      with open(licenseplate_names, 'rt') as f:
+          target_names = f.read().rstrip('\n').split('\n') 
+      
+      # Initalizes the Surrounding Objects' YOLO CFG and Weights File to be used throughout the script. 
+      yolo_model_cfg = vehicle_yolo_cfg                                                                 
+      yolo_model_weight = vehicle_yolo_weights
+      yolo_model = cv2.dnn.readNetFromDarknet(yolo_model_cfg,yolo_model_weight)
+      yolo_model.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
+      yolo_model.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
+      
+      # Initializes the Target Object's YOLO CFG and Weights File to be used throughout the script. 
+      yolo_target_model_cfg = licenseplate_yolo_cfg
+      yolo_target_model_weight = licenseplate_yolo_weights
+      yolo_target_model = cv2.dnn.readNetFromDarknet(yolo_target_model_cfg,yolo_target_model_weight)
+      yolo_target_model.setPreferableBackend(cv2.dnn.DNN_BACKEND_CUDA)
+      yolo_target_model.setPreferableTarget(cv2.dnn.DNN_TARGET_CUDA)
+      ```
+  8. Run the code by executing the Main.py file.
+
+## Running the program with different YOLO models
+To run the code using different YOLO models, update the config.yml file by adding variables with corresponding file paths. 
+
+Sample:
+``` Python
+model_path:
+  model_names: filepath\model.names
+  model_yolo_cfg: filepath\model.cfg
+  model_yolo_weights: filepath\model.weights
+```
+From the config.py create additional lines for file initialization consistent with the config.yml file
+
+Sample:
+```Python 
+model_names = config["model_path"]["model_names"]
+model_yolo_cfg = config["model_path"]["model_yolo_cfg"]
+model_yolo_weights = config["model_path"]["model_yolo_weights"]
+```
+Correspondingly update class names and initialization lines consistent with the specified model.
+
+
+
