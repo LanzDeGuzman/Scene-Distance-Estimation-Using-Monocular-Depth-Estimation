@@ -23,8 +23,7 @@ sensor_height_px = config["camera_information"]["sensor_height_px"]
 focal_length = config["camera_information"]["focal_length"]
 
 real_object_height = config["target_object"]["real_object_height"]
-#target = config["target_object"]["person"]
-target = config["target_object"]["license_plate"]
+target = config["target_object"]["target"]
 
 class_names = []
 with open(vehicle_names, 'rt') as f:
