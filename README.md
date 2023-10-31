@@ -87,7 +87,7 @@ The MDE model that was specifically used was the MiDaS v2.1 Small. The small mod
 **Accuracy testing** was performed under controlled static environments, and **performance testing** was conducted under uncontrolled environments.  
 ## Accuracy Testing 
 
-Household items such as cups and bottles were used throughout the accuracy testing period. From the test samples below, a cup was the target object, and the bottles were the surrounding objects. Results from the test showed an average of **98% accuracy** in detecting the target object and **87% accuracy** in detecting the target objects.  
+Household items such as cups and bottles were used throughout the accuracy testing period. From the test samples below, a cup was the target object, and the bottles were the surrounding objects. Results from the test showed an average of **98% accuracy** in detecting the target object and **87% accuracy** in detecting the surrounding objects.  
 
 ### Position 1
 ![1](https://github.com/LanzDeGuzman/Scene-Distance-Estimation-Using-Monocular-Depth-Estimation/assets/97860488/96a99c8e-c9dc-49a0-9ba0-8874c6cc6b4b)
